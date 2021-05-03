@@ -1,0 +1,8 @@
+<h1 color:blue> Ajouter une agence </h1>
+<ul>
+{% for agence in agences %}
+<li>{{ agence.nom|e }}  {{agence.telagence|e }} {{agence.adresseville|e }} </li>
+{% endfor %}
+</ul>
+</div> 
+<button type="button"  ><a href={{path('Admin')}}>Back</a></button>

@@ -1,0 +1,9 @@
+
+<h1>Ajouter une voiture </h1>
+<ul>
+{% for voiture in voitures %}
+<li>{{ voiture.matricule|e }} {{voiture.marque|e }} {{voiture.couleur|e }} {{voiture.carburant|e }} {{voiture.description|e }} {{voiture.nbrplace|e }} {{voiture.datemiseencirculation|e }} {{voiture.disponibilite|e }}</li>
+{% endfor %}
+</ul>
+</div> 
+<button type="button"  ><a href={{path('Admin')}}>Back</a></button>

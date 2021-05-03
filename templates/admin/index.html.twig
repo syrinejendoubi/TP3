@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}index{% endblock %}
+
+{% block body %}
+<style>
+
+</style>
+<hr>
+<h1>Agences</h1>
+
+
+<h6><a href={{path('AjouterAgence')}}>Ajouter</a></h6>
+<table class='table'>
+<thead class="thead-dark">
+<tr>
+  
+    <th scope="col">ID</th>
+    <th scope="col">Nom</th>
+    <th scope="col">Tel Agence</th>
+    <th scope="col">Adresse Ville</th>
+    <th scope="col">Actions</th>
+    </thead>
+    <tbody>
+    <tbody>
+  {% for agence in agences %} 
+  <tr>
+    <td>{{agence.id}}</td>
+    <td>{{agence.nom}}</td>
+    <td>{{agence.telAgence}}</td>
+     <td>{{agence.adresseVille}}</td> 
+     <td><a href={{path('consulterAgence',{'id':2})}}>Voir</a>
+    <a href={{path('modifierAgence',{'id':2})}}>Modifier</a> 
+      <a href={{path('supprimerAgence',{'id':2})}}>Supprimer</a> </td>
+</tr>
+{% endfor %}
+        <tbody>
+  </table>
+
+<hr>
+<h1>Voitures</h1>
+
+
+<h6><a href={{path('AjouterVoiture')}}>Ajouter</a></h6>
+<table class='table'>
+<thead class="thead-dark">
+<tr>
+  
+    <th scope="col">ID</th>
+    <th scope="col">Matricule</th>
+    <th scope="col">Marque</th>
+    <th scope="col">Couleur</th>
+        <th scope="col">Carburant</th>
+    <th scope="col">Description</th>
+    <th scope="col">Nbr places</th>
+    <th scope="col">Date</th>
+    <th scope="col">Disponibilite</th>
+    <th scope="col">Actions</th>
+    </thead>
+    <tbody>
+  {% for voiture in voitures %} 
+  <tr>
+    <td>{{voiture.id}}</td>
+    <td>{{voiture.matricule}}</td>
+    <td>{{voiture.marque}}</td>
+    <td>{{voiture.couleur}}</td>
+    <td>{{voiture.carburant}}</td>
+    <td>{{voiture.description}}</td>
+    <td>{{voiture.nbrplace}}</td>
+    <td>{{voiture.datemiseencirculation}}</td>
+    <td>{{voiture.disponibilite}}</td>
+<td><a href={{path('modifierVoiture',{'mat':'171816STMH'})}}>Modifier</a>
+    <a href={{path('supprimerVoiturebymat',{'mat':'171816STMH'})}}>Supprimer</a> </td>
+</tr>
+{% endfor %}
+</table>
+</tbody>
+{% endblock %}
