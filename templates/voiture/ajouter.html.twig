@@ -1,9 +1,69 @@
 
-<h1>Ajouter une voiture </h1>
-<ul>
-{% for voiture in voitures %}
-<li>{{ voiture.matricule|e }} {{voiture.marque|e }} {{voiture.couleur|e }} {{voiture.carburant|e }} {{voiture.description|e }} {{voiture.nbrplace|e }} {{voiture.datemiseencirculation|e }} {{voiture.disponibilite|e }}</li>
-{% endfor %}
-</ul>
-</div> 
-<button type="button"  ><a href={{path('Admin')}}>Back</a></button>
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
+<style>
+    div{margin:10px;
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+    }
+</style>
+<div>
+<h1>Ajouter une voiture</h1>
+</div>
+{{form_start(form)}}
+<div>
+{{ form_label(form.matricule) }}
+</div>
+<div>
+{{ form_widget(form.matricule, {'attr': {'placeholder': 'Matricule de la voiture'}}) }}
+</div>
+<div>
+{{ form_label(form.marque) }}
+</div>
+<div>
+{{ form_widget(form.marque, {'attr': {'placeholder': 'Marque de la voiture'}}) }}
+{{form_errors(form.marque)}}
+</div>
+<div>
+{{ form_label(form.couleur) }}
+</div>
+<div>
+{{ form_widget(form.couleur, {'attr': {'placeholder': 'couleur de voiture'}}) }}
+</div>
+<div>
+{{ form_label(form.carburant) }}
+</div>
+<div>
+{{ form_widget(form.carburant, {'attr': {'placeholder': 'carburant de la voiture'}}) }}
+</div>
+<div>
+{{ form_label(form.description) }}
+</div>
+<div>
+{{ form_widget(form.description, {'attr': {'placeholder': 'description de voiture'}}) }}
+</div>
+<div>
+{{ form_label(form.datemiseencirculation) }}
+</div>
+<div>
+{{ form_widget(form.datemiseencirculation) }}
+</div>
+<div>
+{{ form_label(form.nbrplace) }}
+</div>
+<div>
+{{ form_widget(form.nbrplace, {'attr': {'placeholder': 'nombre de place'}}) }}
+</div>
+<div>
+<input type="submit" name="" value="Enregistrer" class="btn btn-primary">
+</div>
+
+{{form_end(form)}}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('Admin')}}>Back</a></button>
+</div>
+{% endblock body %}

@@ -12,8 +12,9 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="Admin")
+     *@Route("/",name="")
      */
-    public function index(): Response
+      public function index(): Response
     {
        $entityManager=$this->getDoctrine()->getManager();
         $agence =  $entityManager->getRepository(Agence::class)->findAll();
@@ -26,5 +27,5 @@ class AdminController extends AbstractController
             'voitures' =>$voiture,
            
         ]);
-    }
+    } 
 }

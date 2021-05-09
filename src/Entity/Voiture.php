@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=VoitureRepository::class)
  */
@@ -18,12 +18,13 @@ class Voiture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
     private $matricule;
 
     /**
      * @ORM\Column(type="string", length=30)
+     *@Assert\NotBlank
      */
     private $marque;
 

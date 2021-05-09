@@ -10,7 +10,7 @@
 <h1>Agences</h1>
 
 
-<h6><a href={{path('AjouterAgence')}}>Ajouter</a></h6>
+<h6><a href={{path('createAgence')}}>Ajouter</a></h6>
 <table class='table'>
 <thead class="thead-dark">
 <tr>
@@ -29,9 +29,9 @@
     <td>{{agence.nom}}</td>
     <td>{{agence.telAgence}}</td>
      <td>{{agence.adresseVille}}</td> 
-     <td><a href={{path('consulterAgence',{'id':2})}}>Voir</a>
-    <a href={{path('modifierAgence',{'id':2})}}>Modifier</a> 
-      <a href={{path('supprimerAgence',{'id':2})}}>Supprimer</a> </td>
+     <td><a href={{path('consulterAgence',{'id':agence.id})}}>Voir</a>
+    <a href={{path('modifierAgence',{'id':agence.id})}}>Modifier</a> 
+      <a href={{path('supprimerAgence',{'id':agence.id})}}>Supprimer</a> </td>
 </tr>
 {% endfor %}
         <tbody>
@@ -41,7 +41,7 @@
 <h1>Voitures</h1>
 
 
-<h6><a href={{path('AjouterVoiture')}}>Ajouter</a></h6>
+<h6><a href={{path('createVoiture')}}>Ajouter</a></h6>
 <table class='table'>
 <thead class="thead-dark">
 <tr>
@@ -69,8 +69,8 @@
     <td>{{voiture.nbrplace}}</td>
     <td>{{voiture.datemiseencirculation}}</td>
     <td>{{voiture.disponibilite}}</td>
-<td><a href={{path('modifierVoiture',{'mat':'171816STMH'})}}>Modifier</a>
-    <a href={{path('supprimerVoiturebymat',{'mat':'171816STMH'})}}>Supprimer</a> </td>
+<td><a href={{path('modifierVoiture',{'id':voiture.id})}}>Modifier</a>
+    <a href={{path('supprimerVoiturebymat',{'mat':voiture.matricule})}}>Supprimer</a> </td>
 </tr>
 {% endfor %}
 </table>

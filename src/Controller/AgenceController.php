@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Agence;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\AgenceType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class AgenceController extends AbstractController
 {
     /**
@@ -16,7 +21,7 @@ class AgenceController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $agence = $entityManager->getRepository(Agence::class)->findAll();      
-        return $this->render('agence/ajouter.html.twig', [
+        return $this->render('agence/index.html.twig', [
             'agences' => $agence,
         ]);
     }
@@ -33,51 +38,54 @@ class AgenceController extends AbstractController
      /**
           * @Route("/agence/modifier/{id}", name="modifierAgence")
      */
-    public function modifier(int $id)
+    public function modifier(int $id, Request $request): Response
 
-    {  $entityManager = $this->getDoctrine()->getManager();
-        $agence = $this->getDoctrine()->getRepository(Agence::class)->findBy(array('id'=>$id));
-        if(! $agence){
-            throw $this->createNotFoundExpectation(
-                'pas d agence avec cet id|'.$id
-            );
+    {  $repo = $this->getDoctrine()->getRepository(Agence::class);
+        $agence = $repo->find($id);
+        $form= $this->createForm(AgenceType::class, $agence);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($agence);
+            $em->flush();
+            return $this->redirectToRoute('AjouterAgence');
         }
-        $agence[0]->setNom('Amine');
-        $entityManager->flush();
-        return $this->redirectToRoute('consulterAgence',['id'=>$id]);
+        return $this->render('/agence/modifier.html.twig',['form'=> $form->createView()
+        ]);
     }
       /**
           * @Route("/agence/supprimer/{id}", name="supprimerAgence")
      */
     public function supprimer(int $id):Response
     {  $entityManager = $this->getDoctrine()->getManager();
-        $agence = $this->getDoctrine()->getRepository(Agence::class)->findBy(array('id'=>$id));
+        $agence = $this->getDoctrine()->getRepository(Agence::class)->find($id);
         if(! $agence){
             throw $this->createNotFoundExpectation(
                 'pas de voiture avec cet id|'.$id
             );
         }
-        $entityManager->remove($agence[0]);
+        $entityManager->remove($agence);
         $entityManager->flush();
         return $this->redirectToRoute('AjouterAgence');
      } 
         /**
      * @Route("/createAgence", name="createAgence")
      */
-    public function createAgence():Response
+    public function createAgence(Request $request):Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
         $agence = new Agence();
-    
-        $agence->setNom('Laly');
-        $agence->setTelAgence(71485217);
-        $agence-> setAdresseville('Tunis');
-       
-        
-        $entityManager->persist($agence);
-        $entityManager->flush();
-        return new Response ('nouvelle agence ajouté avec le nom :'.$agence->getNom());
+        $form= $this->createForm(agenceType::class, $agence);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($agence);
+            $entityManager->flush();
 
+            return $this->redirectToRoute('AjouterAgence');
+        }
+        return $this->render('agence/ajouter.html.twig', [
+            'form' => $form->createView()
+            ]);
     }
 
 

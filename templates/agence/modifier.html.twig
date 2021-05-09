@@ -1,5 +1,46 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
 <style>
-h1{color:blue;}
+    div{margin:10px;
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+    }
 </style>
-<h1>Modifier une agence : </h1>
-<button type="button"  ><a href={{path('Admin')}}>Back</a></button>
+<div>
+<h1>Modifier une agence</h1>
+</div>
+{{form_start(form)}}
+<div>
+{{ form_label(form.nom) }}
+</div>
+<div>
+{{ form_widget(form.nom, {'attr': {'placeholder': 'nom de la voiture'}}) }}
+</div>
+<div>
+{{ form_label(form.tel_agence) }}
+</div>
+<div>
+{{ form_widget(form.tel_agence, {'attr': {'placeholder': 'tel_agence'}}) }}
+{{form_errors(form.tel_agence)}}
+</div>
+<div>
+{{ form_label(form.adresseville) }}
+</div>
+<div>
+{{ form_widget(form.adresseville, {'attr': {'placeholder': 'adresse ville'}}) }}
+{{form_errors(form.adresseville)}}
+</div>
+
+<div>
+<input type="submit" name="" value="Modifier" class="btn btn-primary">
+</div>
+
+{{form_end(form)}}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('Admin')}}>Back</a></button>
+</div>
+{% endblock body %}

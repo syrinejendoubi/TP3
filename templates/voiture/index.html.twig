@@ -11,7 +11,7 @@
    <h1>Voitures</h1>
 <ul>
 {% for voiture in voitures %}
-<li>{{ voiture.marque|e }}  {{voiture.nbrplace|e }} Places </li>
+<li>{{ voiture.marque|e }} {{voiture.description|e }} {{voiture.nbrplace|e }} Places </li>
 {% endfor %}
 </ul>
 </div> 
